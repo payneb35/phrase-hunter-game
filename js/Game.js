@@ -87,7 +87,7 @@ class Game {
             gameOverMessage.textContent = 'Looks like you lost... Try again!';
             startScreen.classList.add('lose');
         }
-        startScreen.style.display = 'block';
+        startScreen.style.display = 'flex';
         startButton.focus();
     }
 
