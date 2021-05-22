@@ -40,7 +40,6 @@ class Game {
             selectedLetter.classList.add('chosen');
             randomPhrase.showMatchedLetter(selectedLetter.textContent);
             if (this.checkForWin()) {
-                console.log('you won');
                 this.gameOver();
             }
         }

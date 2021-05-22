@@ -10,7 +10,10 @@ const phrases = ['Javascript is awesome',
                 'Curiosity killed the cat',
                 'Easy come easy go',
                 'Happy as a clam',
-                'Hold your horses'];
+                'Hold your horses',
+                'Better late than never',
+                'Let it be',
+                'Be happy'];
 
 //Creating a new game object
 const newGame = new Game(0, phrases, phrases[0]);
@@ -27,14 +30,16 @@ keyboard.forEach(key => {
 
 //Handles using physical keyboard when playing
 document.addEventListener('keyup', () => {
-    if (event.key <= 'z' && event.key >= 'a') {
+    if (event.key <= 'z' && event.key >= 'a' && document.querySelector('.start').style.display === 'none') {
         const keyboard = document.querySelectorAll('button.key');
         let pressedKey;
         keyboard.forEach(key => {
-            if (key.textContent === event.key  && !key.disabled) {
-                pressedKey = key;
+            if (!key.disabled) {
+                if (key.textContent === event.key) {
+                    pressedKey = key;
+                    newGame.handleInteraction(pressedKey);
+                }
             }
-        })
-        newGame.handleInteraction(pressedKey);
+        });
     }
 });
