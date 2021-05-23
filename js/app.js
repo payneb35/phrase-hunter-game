@@ -16,7 +16,7 @@ const phrases = ['Javascript is awesome',
                 'Be happy'];
 
 //Creating a new game object
-const newGame = new Game(0, phrases, phrases[0]);
+const newGame = new Game(0, phrases, );
 
 //Makes the "Start Button" start a new game
 startButton.addEventListener('click', () => {
