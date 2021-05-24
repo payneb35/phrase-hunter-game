@@ -3,27 +3,35 @@
  * Game.js */
 
 //Initializing variables that need to be used across the Game class
-const randomPhrase = new Phrase();
 const startScreen = document.querySelector('.start');
 
 class Game {
-    constructor(missed, phrases, activePhrase) {
-        this.missed = missed;
-        this.phrases = phrases;
-        this.activePhrase = activePhrase;
+    constructor() {
+        this.missed = 0;
+        this.phrases = [
+                        new Phrase('Javascript is awesome'),
+                        new Phrase('Curiosity killed the cat'),
+                        new Phrase('Easy come easy go'),
+                        new Phrase('Happy as a clam'),
+                        new Phrase('Hold your horses'),
+                        new Phrase('Better late than never'),
+                        new Phrase('Let it be'),
+                        new Phrase('Be happy')
+                        ];
+        this.activePhrase;
     }
 
     //This method starts the game by removing the start screen, getting the phrase, and displaying it
     startGame() {
         startScreen.classList.remove('win', 'lose');
         startScreen.style.display = 'none';
-        randomPhrase.phrase = this.getRandomPhrase();
-        randomPhrase.addPhraseToDisplay();
+        this.activePhrase = this.getRandomPhrase();
+        this.activePhrase.addPhraseToDisplay();
     }
 
     //This method selects a random phrase from the provided array
     getRandomPhrase() {
-        return phrases[Math.floor(Math.random() * this.phrases.length)];
+        return this.phrases[Math.floor(Math.random() * this.phrases.length)];
     }
 
     //This method handles all user interaction with the page
@@ -31,14 +39,14 @@ class Game {
         //Disabling any selected letters
         selectedLetter.disabled = true;
         //Calling checkLetter on the phrase and passing in the selected letter
-        if (!randomPhrase.checkLetter(selectedLetter.textContent)) {
+        if (!this.activePhrase.checkLetter(selectedLetter.textContent)) {
             //Marking letter as wrong and removing a life
             selectedLetter.classList.add('wrong');
             this.removeLife();
         } else {
             //Marking letter as correct, showing letter(s) in hidden phrase, and checking for a win
             selectedLetter.classList.add('chosen');
-            randomPhrase.showMatchedLetter(selectedLetter.textContent);
+            this.activePhrase.showMatchedLetter(selectedLetter.textContent);
             if (this.checkForWin()) {
                 this.gameOver();
             }
